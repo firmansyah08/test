@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "BorrowedBook" ADD COLUMN     "borrowedDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
