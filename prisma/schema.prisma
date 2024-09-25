@@ -8,10 +8,11 @@ datasource db {
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
-  code         String         @unique
-  name         String
-  BorrowedBook BorrowedBook[]
+  id            Int            @id @default(autoincrement())
+  code          String         @unique
+  name          String
+  BorrowedBook  BorrowedBook[]
+  datePenalized DateTime?
 }
 
 model Book {
@@ -24,10 +25,11 @@ model Book {
 }
 
 model BorrowedBook {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   userId       Int?
   bookId       Int?
-  book         Book?    @relation(fields: [bookId], references: [id])
-  user         User?    @relation(fields: [userId], references: [id])
-  borrowedDate DateTime @default(now())
+  book         Book?     @relation(fields: [bookId], references: [id])
+  user         User?     @relation(fields: [userId], references: [id])
+  borrowedDate DateTime  @default(now())
+  returnedDate DateTime?
 }

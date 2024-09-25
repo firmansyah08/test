@@ -9,10 +9,18 @@ export class BorrowService {
     async checkBook(
         BorrowedBookWhereInput: Prisma.BorrowedBookWhereInput
     ): Promise<BorrowedBook[]> {
-        return this.prisma.borrowedBook.findMany({ where: BorrowedBookWhereInput })
+        return await this.prisma.borrowedBook.findMany({ where: BorrowedBookWhereInput })
     }
     
-    async borrowBook(data: Prisma.BorrowedBookCreateInput): Promise<BorrowedBook> {
-        return this.prisma.borrowedBook.create({ data })
+    async borrowBook(
+        data: Prisma.BorrowedBookCreateInput
+    ): Promise<BorrowedBook> {
+        return await this.prisma.borrowedBook.create({ data })
+    }
+
+    async checkStock(
+        BorrowedBookWhereInput: Prisma.BorrowedBookWhereInput
+    ) {
+        return await this.prisma.borrowedBook.count({ where: BorrowedBookWhereInput })
     }
 }

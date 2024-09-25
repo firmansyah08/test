@@ -1,6 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import { BookService } from './book.service';
-import { Book as BookModel } from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('book')
 export class BookController {
@@ -8,13 +8,32 @@ export class BookController {
         private readonly bookService: BookService
     ) {}
 
-    @Get()
-    async GetBook(): Promise<BookModel[]> {
-        return this.bookService.getBook()
+    @ApiTags('Book')
+    @Get('/')
+    async GetBook(
+        @Res() res
+    ) {
+        const books = await this.bookService.getBook()
+
+        return res.status(HttpStatus.OK).json({
+            status: 'success',
+            message: 'success get list book',
+            data: books
+        })
     }
 
+    @ApiTags('Book')
     @Get('/:id')
-    async GetBookByCode(@Param('id') id: string): Promise<BookModel> {
-        return this.bookService.getBookByCode({ code: id })
+    async GetBookByCode(
+        @Res() res,
+        @Param('id') id: string
+    ) {
+        const book = await this.bookService.getBookByCode({ code: id })
+
+        return res.status(HttpStatus.OK).json({
+            status: 'success',
+            message: 'success get detail book',
+            data: book
+        })
     }
 }
