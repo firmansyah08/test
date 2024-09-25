@@ -58,6 +58,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Run swagger
+While the application is running, open your browser and navigate to [http://localhost:3000/api](http://localhost:3000/api). You should see the Swagger UI.
+
+
 ## Resources
 
 Check out a few resources that may come in handy when working with NestJS:
